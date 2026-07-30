@@ -5,7 +5,7 @@ import { useMenu } from "@/context/menu";
 
 export function Header() {
   const { count, setOpen } = useCart();
-  const { categories } = useMenu();
+  const { menuTypes } = useMenu();
 
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/80 border-b border-border/60">
@@ -17,10 +17,10 @@ export function Header() {
           <span className="font-display text-xl font-bold text-taro">{SHOP.name}</span>
         </a>
         <nav className="hidden md:flex items-center gap-1 text-sm font-medium">
-          {categories.map((c) => (
+          {menuTypes.map((c) => (
             <a
               key={c}
-              href={`#menu-${c}`}
+              href="#menu"
               className="rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-taro"
             >
               {c}
