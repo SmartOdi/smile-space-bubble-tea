@@ -3,7 +3,7 @@ import { fetchMenu, type Product } from "@/lib/menu";
 
 type MenuCtx = {
   products: Product[];
-  categories: string[];
+  menuTypes: string[];
   loading: boolean;
   error: string | null;
   reload: () => void;
@@ -35,13 +35,13 @@ export function MenuProvider({ children }: { children: ReactNode }) {
     return () => ctrl.abort();
   }, [nonce]);
 
-  const categories = useMemo(() => {
+  const menuTypes = useMemo(() => {
     const seen = new Set<string>();
     const out: string[] = [];
     for (const p of products) {
-      if (p.category && !seen.has(p.category)) {
-        seen.add(p.category);
-        out.push(p.category);
+      if (p.menuType && !seen.has(p.menuType)) {
+        seen.add(p.menuType);
+        out.push(p.menuType);
       }
     }
     return out;
@@ -49,7 +49,7 @@ export function MenuProvider({ children }: { children: ReactNode }) {
 
   return (
     <Ctx.Provider
-      value={{ products, categories, loading, error, reload: () => setNonce((n) => n + 1) }}
+      value={{ products, menuTypes, loading, error, reload: () => setNonce((n) => n + 1) }}
     >
       {children}
     </Ctx.Provider>

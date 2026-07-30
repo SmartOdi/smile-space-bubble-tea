@@ -7,7 +7,7 @@
 //
 // Colonnes attendues : Nom, Categorie, Description, Prix, Image, Badge, Disponible
 export const MENU_CSV_URL =
-  "https://docs.google.com/spreadsheets/d/e/REMPLACER_PAR_VOTRE_ID/pub?gid=0&single=true&output=csv";
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vTWEALl8Y-HbtawWfEw9zm4vefuhKtf-1N1UInU65r-90AH-3G-6sCfQSM2x4XXSbImcjUDujF1C88B/pub?output=csv";
 
 export const DEFAULT_PRODUCT_IMAGE =
   "data:image/svg+xml;utf8," +
@@ -32,6 +32,7 @@ export type Product = {
   description: string;
   price: number; // FCFA
   category: string;
+  menuType: string;
   badge?: string;
   image: string;
   available: boolean;
@@ -152,6 +153,9 @@ const HEADER_ALIASES: Record<string, string> = {
   produit: "name",
   categorie: "category",
   category: "category",
+  type_menu: "menuType",
+  typemenu: "menuType",
+  type: "menuType",
   description: "description",
   desc: "description",
   prix: "price",
@@ -191,6 +195,7 @@ export function rowsToProducts(rows: string[][]): Product[] {
       description: get(row, "description"),
       price: parsePrice(get(row, "price")),
       category: get(row, "category") || "Autres",
+      menuType: get(row, "menuType") || "Menu",
       badge: get(row, "badge") || undefined,
       image: isValidImageUrl(rawImage) ? rawImage : DEFAULT_PRODUCT_IMAGE,
       available: parseAvailable(get(row, "available")),

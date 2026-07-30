@@ -1,15 +1,43 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ProductCard } from "./ProductCard";
 import { useMenu } from "@/context/menu";
 
 export function Menu() {
-  const { products, categories, loading, error } = useMenu();
-  const [active, setActive] = useState<string>("Tout");
+  const { products, menuTypes, loading, error } = useMenu();
+  const [activeType, setActiveType] = useState<string>("");
+  const [activeCategory, setActiveCategory] = useState<string>("Tout");
 
-  const tabs = ["Tout", ...categories];
-  const currentTab = tabs.includes(active) ? active : "Tout";
+  // Sélectionne le premier type de menu dès que les données arrivent
+  useEffect(() => {
+    if (menuTypes.length > 0 && !menuTypes.includes(activeType)) {
+      setActiveType(menuTypes[0]);
+      setActiveCategory("Tout");
+    }
+  }, [menuTypes, activeType]);
+
+  const productsForType = useMemo(
+    () => products.filter((p) => p.menuType === activeType),
+    [products, activeType],
+  );
+
+  const categories = useMemo(() => {
+    const seen = new Set<string>();
+    const out: string[] = [];
+    for (const p of productsForType) {
+      if (p.category && !seen.has(p.category)) {
+        seen.add(p.category);
+        out.push(p.category);
+      }
+    }
+    return out;
+  }, [productsForType]);
+
+  const catTabs = ["Tout", ...categories];
+  const currentCat = catTabs.includes(activeCategory) ? activeCategory : "Tout";
   const list =
-    currentTab === "Tout" ? products : products.filter((p) => p.category === currentTab);
+    currentCat === "Tout"
+      ? productsForType
+      : productsForType.filter((p) => p.category === currentCat);
 
   return (
     <section id="menu" className="relative py-16 md:py-24">
@@ -63,16 +91,38 @@ export function Menu() {
           <div className="py-16 text-center text-muted-foreground">Aucun produit disponible.</div>
         ) : (
           <>
-            {/* Onglets sticky glassmorphism */}
+            {/* Onglets type de menu (niveau 1) */}
+            {menuTypes.length > 1 && (
+              <div className="mb-4 flex justify-center gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {menuTypes.map((t) => (
+                  <button
+                    key={t}
+                    onClick={() => {
+                      setActiveType(t);
+                      setActiveCategory("Tout");
+                    }}
+                    className={`shrink-0 rounded-full border-2 px-5 py-2 text-sm font-bold transition-all duration-200 ${
+                      activeType === t
+                        ? "border-taro bg-taro text-white shadow-md"
+                        : "border-taro/20 bg-transparent text-taro hover:bg-taro/5"
+                    }`}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Onglets catégorie (niveau 2, glassmorphism sticky) */}
             <div className="sticky top-16 z-20 -mx-4 mb-10 px-4">
               <div className="rounded-3xl border border-white/50 bg-background/60 px-3 py-3 shadow-lg shadow-taro/5 backdrop-blur-xl">
                 <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                  {tabs.map((t) => (
+                  {catTabs.map((t) => (
                     <button
                       key={t}
-                      onClick={() => setActive(t)}
+                      onClick={() => setActiveCategory(t)}
                       className={`shrink-0 rounded-full px-5 py-2 text-sm font-bold transition-all duration-200 ${
-                        currentTab === t
+                        currentCat === t
                           ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30"
                           : "border border-taro/10 bg-card/70 text-taro hover:bg-secondary"
                       }`}
@@ -84,11 +134,7 @@ export function Menu() {
               </div>
             </div>
 
-            {categories.map((c) => (
-              <div key={c} id={`menu-${c}`} className="scroll-mt-32" />
-            ))}
-
-            {/* Liste dynamique alternée */}
+            {/* Liste dynamique */}
             <div className="space-y-10 pt-4">
               {list.map((p, i) => (
                 <ProductCard key={p.id} product={p} index={i} />

@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Boba Loba — Bubble Tea artisanal, commande WhatsApp" },
+      { title: "Smile Space — Bubble Tea artisanal, commande WhatsApp" },
       {
         name: "description",
         content:
-          "Boba Loba, la boutique de bubble tea gourmande. Recettes au taro, litchi, mangue et matcha. Commandez en un clic sur WhatsApp.",
+          "Smile Space, la boutique de bubble tea gourmande. Recettes au taro, litchi, mangue et matcha. Commandez en un clic sur WhatsApp.",
       },
-      { name: "author", content: "Boba Loba" },
-      { property: "og:title", content: "Boba Loba — Bubble Tea artisanal" },
+      { name: "author", content: "Smile Space" },
+      { property: "og:title", content: "Smile Space — Bubble Tea artisanal" },
       {
         property: "og:description",
         content: "Bubble tea frais, perles de tapioca maison, livraison rapide via WhatsApp.",
