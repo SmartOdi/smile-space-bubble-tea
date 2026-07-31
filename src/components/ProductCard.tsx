@@ -38,30 +38,28 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
       <div
         className={`relative flex items-center gap-4 sm:gap-5 ${flipped ? "flex-row-reverse" : ""}`}
       >
-        {/* Image tile */}
-        <div className="relative h-48 w-36 shrink-0">
-          <div className="absolute inset-0 rounded-3xl bg-card shadow-xl shadow-taro/10" />
-          <div className="absolute inset-x-0 -top-1 mx-auto h-40 w-32 sm:-top-4 sm:h-52 sm:w-40">
-            <img
-              src={product.image}
-              alt={product.name}
-              loading="lazy"
-              onError={(e) => {
-                const img = e.currentTarget;
-                if (img.src !== DEFAULT_PRODUCT_IMAGE) img.src = DEFAULT_PRODUCT_IMAGE;
-              }}
-              className="h-full w-full object-contain drop-shadow-[0_10px_14px_rgba(120,53,15,0.2)] transition-transform duration-500 group-[.reveal-in]:-translate-y-0.5 group-[.reveal-in]:rotate-[-1deg] sm:group-[.reveal-in]:-translate-y-1 sm:group-[.reveal-in]:rotate-[-2deg]"
-            />
-          </div>
+       {/* Image tile */}
+        <div className="relative h-48 w-36 shrink-0 overflow-hidden rounded-3xl bg-card shadow-xl shadow-taro/10">
+          <img
+            src={product.image}
+            alt={product.name}
+            loading="lazy"
+            onError={(e) => {
+              const img = e.currentTarget;
+              if (img.src !== DEFAULT_PRODUCT_IMAGE) img.src = DEFAULT_PRODUCT_IMAGE;
+            }}
+            className="h-full w-full object-cover transition-transform duration-500 group-[.reveal-in]:scale-105"
+          />
           {product.badge && (
             <span
-              className={`absolute -top-2 z-10 rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-tight shadow-lg ${badgeClass} ${
-                flipped ? "-left-2" : "-right-2"
+              className={`absolute top-2 z-10 rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-tight shadow-lg ${badgeClass} ${
+                flipped ? "left-2" : "right-2"
               }`}
             >
               {product.badge}
             </span>
           )}
+
         </div>
 
         {/* Text block */}
