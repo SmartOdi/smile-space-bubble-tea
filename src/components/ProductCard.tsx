@@ -41,7 +41,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
         {/* Image tile */}
         <div className="relative h-48 w-36 shrink-0">
           <div className="absolute inset-0 rounded-3xl bg-card shadow-xl shadow-taro/10" />
-          <div className="absolute inset-x-0 -top-3 mx-auto h-40 w-32 sm:-top-6 sm:h-52 sm:w-40">
+          <div className="absolute inset-x-0 -top-1 mx-auto h-40 w-32 sm:-top-4 sm:h-52 sm:w-40">
             <img
               src={product.image}
               alt={product.name}
@@ -50,7 +50,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
                 const img = e.currentTarget;
                 if (img.src !== DEFAULT_PRODUCT_IMAGE) img.src = DEFAULT_PRODUCT_IMAGE;
               }}
-              className="h-full w-full object-contain drop-shadow-[0_18px_22px_rgba(120,53,15,0.25)] transition-transform duration-500 group-[.reveal-in]:-translate-y-1 group-[.reveal-in]:rotate-[-2deg] sm:group-[.reveal-in]:-translate-y-2 sm:group-[.reveal-in]:rotate-[-4deg]"
+              className="h-full w-full object-contain drop-shadow-[0_10px_14px_rgba(120,53,15,0.2)] transition-transform duration-500 group-[.reveal-in]:-translate-y-0.5 group-[.reveal-in]:rotate-[-1deg] sm:group-[.reveal-in]:-translate-y-1 sm:group-[.reveal-in]:rotate-[-2deg]"
             />
           </div>
           {product.badge && (
