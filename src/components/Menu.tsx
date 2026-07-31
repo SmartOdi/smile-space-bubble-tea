@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { ProductCard } from "./ProductCard";
 import { useMenu } from "@/context/menu";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export function Menu() {
   const { products, menuTypes, loading, error } = useMenu();
   const [activeType, setActiveType] = useState<string>("");
   const [activeCategory, setActiveCategory] = useState<string>("Tout");
+  const menuSectionRef = useRef<HTMLElement>(null);
 
   // Sélectionne le premier type de menu dès que les données arrivent
   useEffect(() => {
@@ -40,7 +42,7 @@ export function Menu() {
       : productsForType.filter((p) => p.category === currentCat);
 
   return (
-    <section id="menu" className="relative py-16 md:py-24">
+    <section id="menu" ref={menuSectionRef} className="relative py-16 md:py-24">
       {/* Décor perles flottantes locales */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         <span className="absolute left-6 top-24 h-6 w-6 rounded-full bg-taro/10 animate-float-slow" />
@@ -101,7 +103,7 @@ export function Menu() {
                       setActiveType(t);
                       setActiveCategory("Tout");
                     }}
-                    className={`shrink-0 rounded-full border-2 px-5 py-2 text-sm font-bold transition-all duration-200 ${
+                    className={`shrink-0 rounded-full border-2 px-5 py-2 text-sm font-bold outline-none transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 ${
                       activeType === t
                         ? "border-taro bg-taro text-white shadow-md"
                         : "border-taro/20 bg-transparent text-taro hover:bg-taro/5"
@@ -120,8 +122,11 @@ export function Menu() {
                   {catTabs.map((t) => (
                     <button
                       key={t}
-                      onClick={() => setActiveCategory(t)}
-                      className={`shrink-0 rounded-full px-5 py-2 text-sm font-bold transition-all duration-200 ${
+                      onClick={() => {
+                        setActiveCategory(t);
+                        menuSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                      }}
+                      className={`shrink-0 rounded-full px-5 py-2 text-sm font-bold outline-none transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 ${
                         currentCat === t
                           ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30"
                           : "border border-taro/10 bg-card/70 text-taro hover:bg-secondary"

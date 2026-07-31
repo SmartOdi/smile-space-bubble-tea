@@ -2,18 +2,20 @@ import { ShoppingBag } from "lucide-react";
 import { SHOP } from "@/lib/shop";
 import { useCart } from "@/context/cart";
 import { useMenu } from "@/context/menu";
+import logo from "@/assets/logo.png";
 
 export function Header() {
   const { count, setOpen } = useCart();
   const { menuTypes } = useMenu();
-
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/80 border-b border-border/60">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
         <a href="#top" className="flex items-center gap-2 shrink-0">
-          <span className="grid h-10 w-10 place-items-center rounded-2xl bg-primary text-primary-foreground font-display text-lg shadow-md">
-            🧋
-          </span>
+          <img
+            src={logo}
+            alt={SHOP.name}
+            className="h-10 w-10 rounded-2xl object-cover shadow-md"
+          />
           <span className="font-display text-xl font-bold text-taro">{SHOP.name}</span>
         </a>
         <nav className="hidden md:flex items-center gap-1 text-sm font-medium">

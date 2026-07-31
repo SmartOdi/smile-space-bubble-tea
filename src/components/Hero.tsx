@@ -57,12 +57,6 @@ export function Hero() {
           <div className="mt-7 flex flex-wrap gap-3">
             <a
               href="#menu"
-              className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-transform hover:scale-105"
-            >
-              Commander maintenant
-            </a>
-            <a
-              href="#menu"
               className="rounded-full border border-border bg-card/70 px-6 py-3 text-sm font-semibold text-taro backdrop-blur transition-colors hover:bg-secondary"
             >
               Voir le menu
@@ -70,7 +64,7 @@ export function Hero() {
           </div>
           <div className="mt-8 flex items-center gap-6 text-xs text-muted-foreground">
             <div>
-              <div className="font-display text-2xl font-bold text-taro">10+</div>
+              <div className="font-display text-2xl font-bold text-taro">15+</div>
               recettes
             </div>
             <div>

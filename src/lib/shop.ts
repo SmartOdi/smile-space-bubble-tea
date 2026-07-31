@@ -1,8 +1,8 @@
 export const SHOP = {
-  name: "Boba Loba",
-  tagline: "Bubble tea artisanal, perles maison",
-  whatsapp: "22500000000", // international format, no +
-  address: "Rue des Jardins, Cocody, Abidjan",
+  name: "Smile Space",
+  tagline: "Bubble tea frais",
+  whatsapp: "2290190605959", // international format, no +
+  address: "Von TCHI-TCHI AFRICA, Haie Vive, Les Cocotiers, Cotonou",
   hours: "Tous les jours · 10h – 22h",
-  mapsUrl: "https://maps.google.com/?q=Cocody+Abidjan",
+  mapsUrl: "https://maps.app.goo.gl/uTdg6KMC1WxV1vb88",
 };

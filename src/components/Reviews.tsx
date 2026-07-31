@@ -4,7 +4,7 @@ import { useReveal } from "@/hooks/useReveal";
 const REVIEWS = [
   {
     name: "Awa K.",
-    text: "Le Taro Royal est une tuerie ! Les perles sont parfaitement cuites, ni trop molles ni trop dures.",
+    text: "Le Taro est une tuerie ! Les perles sont parfaitement cuites, ni trop molles ni trop dures.",
     stars: 5,
     initial: "A",
     color: "var(--taro)",
@@ -18,7 +18,7 @@ const REVIEWS = [
   },
   {
     name: "Fatou D.",
-    text: "Enfin un vrai bubble tea à Abidjan ! Le Litchi Rose sent trop bon, j'y retourne cette semaine.",
+    text: "Enfin un vrai bubble tea à Cotonou ! Le Ice Coffee sent trop bon, j'y retourne cette semaine.",
     stars: 5,
     initial: "F",
     color: "var(--mango)",

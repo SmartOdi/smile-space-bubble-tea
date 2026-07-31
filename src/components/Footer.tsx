@@ -1,6 +1,7 @@
 import { MapPin, Clock } from "lucide-react";
 import { WhatsAppIcon } from "./icons";
 import { SHOP } from "@/lib/shop";
+import logo from "@/assets/logo.png";
 
 export function Footer() {
   return (
@@ -8,9 +9,11 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-14 md:grid-cols-3">
         <div>
           <div className="flex items-center gap-2">
-            <span className="grid h-10 w-10 place-items-center rounded-2xl bg-white text-taro font-display text-lg">
-              🧋
-            </span>
+            <img
+              src={logo}
+              alt={SHOP.name}
+              className="h-10 w-10 rounded-2xl bg-white object-cover p-1"
+            />
             <span className="font-display text-2xl font-bold">{SHOP.name}</span>
           </div>
           <p className="mt-3 text-sm text-white/80">
@@ -55,7 +58,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 py-4 text-center text-xs text-white/70">
-        © {new Date().getFullYear()} {SHOP.name}. Fait avec 🧋 à Abidjan.
+        © {new Date().getFullYear()} {SHOP.name}. Fait avec 🧋 à Cotonou.
       </div>
     </footer>
   );

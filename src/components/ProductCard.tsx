@@ -32,7 +32,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
       style={{ transitionDelay: `${Math.min(index, 6) * 80}ms` }}
     >
       <div
-        className={`absolute -inset-3 rounded-[42px] transition-transform duration-500 group-hover:rotate-0 ${backdropClass}`}
+        className={`absolute -inset-3 rounded-[42px] transition-transform duration-500 group-[.reveal-in]:rotate-0 ${backdropClass}`}
         aria-hidden="true"
       />
       <div
@@ -50,7 +50,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
                 const img = e.currentTarget;
                 if (img.src !== DEFAULT_PRODUCT_IMAGE) img.src = DEFAULT_PRODUCT_IMAGE;
               }}
-              className="h-full w-full object-contain drop-shadow-[0_18px_22px_rgba(120,53,15,0.25)] transition-transform duration-500 group-hover:-translate-y-2 group-hover:rotate-[-4deg]"
+              className="h-full w-full object-contain drop-shadow-[0_18px_22px_rgba(120,53,15,0.25)] transition-transform duration-500 group-[.reveal-in]:-translate-y-2 group-[.reveal-in]:rotate-[-4deg]"
             />
           </div>
           {product.badge && (
